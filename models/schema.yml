@@ -73,6 +73,8 @@ models:
             tests:
                 - not_null
           - name: summary
+            description: "Title of the epic."
+          - name: description
             description: "Description of the epic."
           - name: reporter_id
             description: "Employee who owns the epic."
@@ -88,17 +90,19 @@ models:
                 - not_null
           - name: project_id
             description: "Project the epic is tied to."
-          - name: status
-            description: "Status for the Epic."
+          - name: resolution
+            description: "Resolution for the Epic."
             tests:
                 - not_null
           - name: resolution_date
             description: "Date the issue was completed (timestamp)."
+          - name: priority
+            description: "FK referencing the priority of the epic."
           - name: created_date
             description: "Date the issue was created (timestamp)."
             tests:
                 - not_null
-          - name: closed_date
+          - name: resolution_date
             description: "Date the issue was closed (timestamp)."
           - name: last_updated_date
             description: "Date the issue was last updated (timestamp)."
@@ -108,7 +112,7 @@ models:
             description: "Employee who last updated the ticket."
             tests:
                 - not_null
-          - name: url
+          - name: self_url
             description: "Url to the ticket website."
             tests:
                 - unique
@@ -214,8 +218,6 @@ models:
             description: "Expected due date for the issue (timestamp)."
           - name: priority
             description: "FK referencing the priority of the issue."
-            tests:
-                - not_null
           - name: original_estimate
             description: "The estimate of how much work this issue will take (in seconds)."
             tests:
@@ -240,8 +242,6 @@ models:
             description: "The tile of the ticket."
           - name: description
             description: "The issue description."
-            tests:
-                - not_null
           - name: reporter_id
             description: "Employee who created the ticket."
           - name: assignee_id
