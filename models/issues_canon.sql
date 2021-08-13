@@ -17,7 +17,7 @@ SELECT
     JIR.issue::json->'fields'->'project'->>'id' AS project_id,
     JIR.issue::json->'fields'->'issueType'->>'name' AS issue_type,
     JIR.issue::json->'fields'->'resolution'->>'name' AS resolution,
-    JIR.issue::json->'fields'->?'workratio' AS work_ratio,
+    JIR.issue::json->'fields'->>'workratio' AS work_ratio,
     TO_TIMESTAMP(JIR.issue::json->'fields'->>'lastViewed', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS last_viewed_date,
     TO_TIMESTAMP(JIR.issue::json->'fields'->>'resolutiondate', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS resolution_date,
     TO_TIMESTAMP(JIR.issue::json->'fields'->>'created', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS created_date,
