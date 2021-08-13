@@ -1,3 +1,11 @@
+{{
+  config({
+    "post-hook": [
+      "{{create_index(this, 'issue_id')}}",
+      "{{create_index(this, 'author_id')}}",
+    ]
+  })
+}}
 SELECT
     CONCAT_WS(
         '_',
@@ -6,7 +14,7 @@ SELECT
         history->'author'->>'accountId') AS issue_field_history_id,
     item->'fieldId' AS field_id,
     JIR.id AS issue_id,
-    -- history->'created' AS time_change,
+    -- history->a'created' AS time_change,
     TO_TIMESTAMP(history->>'created', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS time_change,
     item->>'toString' AS new_value,
     history->'author'->>'accountId' AS author_id

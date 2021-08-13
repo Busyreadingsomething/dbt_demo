@@ -1,3 +1,13 @@
+{{
+  config({
+    "post-hook": [
+      "{{create_index(this, 'issue_id')}}",
+      "{{create_index(this, 'epic_id')}}",
+      "{{create_index(this, 'reporter_id')}}",
+      "{{create_index(this, 'assignee_id')}}",
+    ]
+  })
+}}
 SELECT
     JIR.id AS issue_id,
     JIR.issue::json->'key' AS key,
