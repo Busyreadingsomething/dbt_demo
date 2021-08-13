@@ -1,7 +1,9 @@
 {{
   config({
-    "post-hook": 'create index if not exists {{ this.name }}__index_on_epic_id on {{ this }} ("epic_id")'
-    })
+    "post-hook": [
+      "{{create_index(this, 'epic_id')}}",
+    ]
+  })
 }}
 SELECT
     JIR.id AS epic_id,
