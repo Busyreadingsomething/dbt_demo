@@ -1,0 +1,255 @@
+version: 2
+
+models:
+    - name: stg_employees
+      description: "Employee table derived from JIRA RAW Data."
+      columns:
+          - name: employee_id
+            description: "The primary key for this table."
+            tests:
+                - unique
+                - not_null
+          - name: first_name
+            description: "First name of employee."
+            tests:
+                - not_null
+          - name: last_name
+            description: "Last name of employee."
+            tests:
+                - not_null
+          - name: email
+            description: "Email of employee."
+            tests:
+                - unique
+                - not_null
+          - name: issue_tracker_id
+            description: "Employee ID for ticketing software."
+            tests:
+                - unique
+          - name: code_repo_id
+            description: "Employee ID for ."
+            tests:
+                - unique
+          - name: wireframe_platform_id
+            description: "Employee ID tied to wireframe platform."
+            tests:
+                - unique
+          - name: reports_to
+            description: "ID of individual the employee reports to."
+          - name: role
+            description: "Employee role."
+            tests:
+                - not_null
+          - name: team
+            description: "Team of the employee."
+            tests:
+                - not_null
+          - name: department
+            description: "Department the employee is tied to."
+          - name: salary
+            description: "Salary of employee."
+          - name: hourly
+            description: "Hourly rate of employee."
+          - name: data_source
+            description: "Source of this data row (Jira, CSV, etc)."
+            tests:
+                - not_null
+
+    - name: stg_epics
+      description: "List of Epics."
+      columns:
+          - name: epic_id
+            description: "The primary key for this table."
+            tests:
+                - unique
+                - not_null
+          - name: key
+            description: "Frontend ID for Jira Epics."
+            tests:
+                - unique
+                - not_null
+          - name: epic_name
+            description: "Name of the epic."
+            tests:
+                - not_null
+          - name: summary
+            description: "Description of the epic."
+          - name: owner_id
+            description: "Employee who owns the epic."
+            tests:
+                - not_null
+          - name: feature_id
+            description: "Feature tied to the epic."
+            tests:
+                - not_null
+          - name: project_id
+            description: "Project the epic is tied to."
+          - name: status
+            description: "Status for the Epic."
+            tests:
+                - not_null
+          - name: created_date
+            description: "Date the issue was created (timestamp)."
+            tests:
+                - not_null
+          - name: closed_date
+            description: "Date the issue was closed (timestamp)."
+          - name: last_updated_date
+            description: "Date the issue was last updated (timestamp)."
+            tests:
+                - not_null
+          - name: last_update_by_id
+            description: "Employee who last updated the ticket."
+            tests:
+                - not_null
+          - name: url
+            description: "Url to the ticket website."
+            tests:
+                - unique
+                - not_null
+          - name: data_source
+            description: "Source of this data row (Jira, Trello, etc)"
+            tests:
+                - not_null
+
+    - name: stg_sprints
+      description: "List of Sprints."
+      columns:
+          - name: sprint_id
+            description: "The primary key for this table."
+            tests:
+                - unique
+                - not_null
+          - name: key
+            description: "Frontend ID for Jira Sprints."
+            tests:
+                - unique
+                - not_null
+          - name: sprint_name
+            description: "Name of the sprint."
+            tests:
+                - not_null
+          - name: summary
+            description: "Description of the sprint."
+          - name: owner_id
+            description: "Employee who owns the sprint."
+            tests:
+                - not_null
+          - name: project_id
+            description: "Project the sprint is tied to."
+          - name: status
+            description: "Status for the sprint."
+            tests:
+                - not_null
+          - name: created_date
+            description: "Date the issue was created (timestamp)."
+            tests:
+                - not_null
+          - name: closed_date
+            description: "Date the issue was closed (timestamp)."
+          - name: last_updated_date
+            description: "Date the issue was last updated (timestamp)."
+            tests:
+                - not_null
+          - name: last_update_by_id
+            description: "Employee who last updated the ticket."
+            tests:
+                - not_null
+          - name: url
+            description: "Url to the ticket website."
+            tests:
+                - unique
+                - not_null
+          - name: data_source
+            description: "Source of this data row (Jira, Trello, etc)"
+            tests:
+                - not_null
+
+    - name: stg_issues
+      description: "Ticket table from the raw Jira Issues Api."
+      columns:
+          - name: issue_id
+            description: "The primary key for this table."
+            tests:
+                - unique
+                - not_null
+          - name: key
+            description: "Frontend ID for Jira Issue."
+            tests:
+                - unique
+                - not_null
+          - name: sprint_id
+            description: "Sprint the issue is tied to."
+            tests:
+                - unique
+                - not_null
+                - relationships:
+                    to: ref('sprints')
+                    field: sprint_id
+          - name: summary
+            description: "Description of the ticket."
+          - name: epic_id
+            description: "Epic the issue is tied to."
+            tests:
+                - unique
+                - not_null
+                - relationships:
+                    to: ref('epics')
+                    field: epic_id
+          - name: owner_id
+            description: "Employee who created the ticket."
+            tests:
+                - not_null
+          - name: status
+            description: "Ticket Status for the Issue."
+            tests:
+                - not_null
+          - name: created_date
+            description: "Date the issue was created (timestamp)."
+            tests:
+                - not_null
+          - name: closed_date
+            description: "Date the issue was closed (timestamp)."
+          - name: last_updated_date
+            description: "Date the issue was last updated (timestamp)."
+            tests:
+                - not_null
+          - name: last_update_by_id
+            description: "Employee who last updated the ticket."
+            tests:
+                - not_null
+          - name: project_id
+            description: "Project the issue is tied to."
+          - name: url
+            description: "Url to the ticket website."
+            tests:
+                - unique
+                - not_null
+          - name: data_source
+            description: "Source of this data row (Jira, Trello, etc)"
+            tests:
+                - not_null
+
+    - name: stg_issue_field_history
+      description: "Ticket table from the raw Jira Issues Api."
+      columns:
+          - name: field_id
+            description: "Referencing the field of the issue that was changed"
+            tests:
+                - not_null
+          - name: issue_id
+            description: "Foreign Key referring to the issue."
+            tests:
+                - not_null
+                - relationships:
+                    to: ref('issues')
+                    field: issue_id
+          - name: time
+            description: "Timestamp of when the change occurred."
+            tests:
+                - not_null
+                - relationships:
+                    to: ref('sprints')
+                    field: sprint_id
+          - name: value
+            description: "Value of the field it was changed to."
