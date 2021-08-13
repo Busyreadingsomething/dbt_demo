@@ -74,10 +74,14 @@ models:
                 - not_null
           - name: summary
             description: "Description of the epic."
-          - name: owner_id
+          - name: reporter_id
             description: "Employee who owns the epic."
             tests:
                 - not_null
+          - name: assignee_id
+            description: "Employee who is assigned this epic."
+          - name: priority
+            description: "Priority of the epic."
           - name: feature_id
             description: "Feature tied to the epic."
             tests:
@@ -88,6 +92,8 @@ models:
             description: "Status for the Epic."
             tests:
                 - not_null
+          - name: resolution_date
+            description: "Date the issue was completed (timestamp)."
           - name: created_date
             description: "Date the issue was created (timestamp)."
             tests:
@@ -186,10 +192,12 @@ models:
                     field: issue_id
           - name: status_category_changed_date
             description: "Timestamp of when teh status changed."
-          - name: timespent
+          - name: time_spent
             description: "Time that was spent working on this issue (in seconds)."
           - name: project_id
             description: "FK referencing the Project the issue is tied to."
+          - name: issue_type
+            description: "Issue type of the ticket."
           - name: resolution
             description: "FK referencing the resolution status."
           - name: work_ratio
@@ -202,6 +210,8 @@ models:
             description: "Date the issue was created (timestamp)."
             tests:
                 - not_null
+          - name: due_date
+            description: "Expected due date for the issue (timestamp)."
           - name: priority
             description: "FK referencing the priority of the issue."
             tests:
@@ -234,12 +244,18 @@ models:
                 - not_null
           - name: reporter_id
             description: "Employee who created the ticket."
-            tests:
-                - not_null
+          - name: assignee_id
+            description: "Employee who is assigned to the ticket."
           - name: environment
             description: "Environment in which the issue occured."
             tests:
                 - not_null
+          - name: sprint_id
+            description: "FK referencing the Sprint."
+            tests:
+                - relationships:
+                    to: ref('sprints')
+                    field: sprint_id
           - name: epic_id
             description: "Epic the issue is tied to."
             tests:
@@ -248,7 +264,7 @@ models:
                 - relationships:
                     to: ref('epics')
                     field: epic_id
-          - name: url
+          - name: self_url
             description: "Url to the ticket website."
             tests:
                 - unique
