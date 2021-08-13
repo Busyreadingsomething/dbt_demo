@@ -33,34 +33,4 @@ SELECT
     'epic_id' AS epic_id,
     JIR.issue::json->>'self' AS self_url,
     'JIRA' AS data_source
-FROM jira_issue_raw AS JIR
-LIMIT 10;
-
--- issue_id
--- key
--- parent_id
--- status_category_changed_date
--- time_spent
--- project_id
--- issue_type
--- resolution
--- work_ratio
--- last_viewed_date
--- resolved_date
--- created_date
--- due_date
--- priority
--- original_estimate
--- - name: remaining_estimate
--- last_updated_date
--- - name: last_update_by_id
--- status
--- summary
--- description
--- reporter_id
--- assignee_id
--- environment
--- - name: sprint_id
--- - name: epic_id
--- self_url
--- data_source
+FROM jira_issue_raw AS JIR;
