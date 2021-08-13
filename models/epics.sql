@@ -1,0 +1,11 @@
+-- SELECT
+--     id,
+--     -- updated,
+--     -- issue,
+--     cast(issue AS json) AS json_data,
+--     issue::json->> 'id' AS issue_id,
+--     ((issue::json->> 'fields')::json->>'issuetype')::json->>'name' AS task,
+--     issue::json->> 'key' AS key
+-- FROM jira_issue_raw
+-- WHERE ((issue::json->> 'fields')::json->>'issuetype')::json->>'name' = 'Epic'
+-- LIMIT 10;
