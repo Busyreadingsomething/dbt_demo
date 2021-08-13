@@ -31,6 +31,3 @@ SELECT
 FROM jira_issue_raw AS JIR
 WHERE issue::json->'fields'->'issuetype'->>'name' = 'Epic'
 LIMIT 10;
-
--- - name: status
--- - name: url

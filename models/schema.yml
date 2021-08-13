@@ -1,7 +1,7 @@
 version: 2
 
 models:
-    - name: epics
+    - name: epics_canon
       description: "List of Epics."
       columns:
           - name: epic_id
@@ -68,7 +68,7 @@ models:
             tests:
                 - not_null
 
-    - name: issues
+    - name: issues_canon
       description: "Ticket table from the raw Jira Issues Api."
       columns:
           - name: issue_id
@@ -163,7 +163,7 @@ models:
             tests:
                 - not_null
 
-    - name: issue_field_history
+    - name: issue_field_history_canon
       description: "Ticket table from the raw Jira Issues Api."
       columns:
           - name: issue_field_history_id
