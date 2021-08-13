@@ -1,6 +1,6 @@
 {{
   config({
-    "post-hook": 'create index if not exists {{ this.name }}__index_on_FIELD on {{ this }} ("epic_id")'
+    "post-hook": 'create index if not exists {{ this.name }}__index_on_epic_id on {{ this }} ("epic_id")'
     })
 }}
 SELECT
