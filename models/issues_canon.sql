@@ -1,4 +1,3 @@
-{##}
 SELECT
     JIR.id AS issue_id,
     JIR.issue::json->'key' AS key,
