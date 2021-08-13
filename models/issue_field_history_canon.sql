@@ -14,4 +14,3 @@ FROM jira_issue_raw AS JIR
 CROSS JOIN JSON_ARRAY_ELEMENTS(issue::json->'changelog'->'histories') AS history
 CROSS JOIN JSON_ARRAY_ELEMENTS(history->'items') AS item
 WHERE json_array_length(issue::json->'changelog'->'histories') > 0
-LIMIT 10
