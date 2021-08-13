@@ -26,18 +26,18 @@ SELECT
     JIR.issue::json->'fields'->>'timeoriginalestimate' AS original_estimate,
     TO_TIMESTAMP(JIR.issue::json->'fields'->>'updated', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS last_updated_date,
     JIR.issue::json->'fields'->'status'->>'name' AS status,
-    JIR.issue::json->'fields'->?'summary' AS summary,
+    JIR.issue::json->'fields'->>'summary' AS summary,
     JIR.issue::json->'fields'->'description'->>'content' AS description,
     JIR.issue::json->'fields'->'creator'->>'accountId' AS reporter_id,
     JIR.issue::json->'fields'->'assignee'->>'accountId' AS assignee_id,
-    JIR.issue::json->'fields'->?'environment' AS environment,
+    JIR.issue::json->'fields'->>'environment' AS environment,
     'remaining_estimate' AS remaining_estimate,
     issue::json
         ->'changelog'
         ->'histories'
         ->(json_array_length(issue::json->'changelog'->'histories')-1)
         ->'author'
-        ->?'accountId' AS last_update_by_id,
+        ->>'accountId' AS last_update_by_id,
     'sprint_id' AS sprint_id,
     'epic_id' AS epic_id,
     JIR.issue::json->>'self' AS self_url,
