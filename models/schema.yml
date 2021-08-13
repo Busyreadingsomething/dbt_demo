@@ -83,7 +83,7 @@ models:
             description: "Self-referencing ID of the parent issue."
             tests:
                 - relationships:
-                    to: ref('issues')
+                    to: ref('issues_canon')
                     field: issue_id
           - name: status_category_changed_date
             description: "Timestamp of when teh status changed."
@@ -149,7 +149,7 @@ models:
                 - unique
                 - not_null
                 - relationships:
-                    to: ref('epics')
+                    to: ref('epics_canon')
                     field: epic_id
           - name: self_url
             description: "Url to the ticket website."
@@ -175,7 +175,7 @@ models:
             tests:
                 - not_null
                 - relationships:
-                    to: ref('issues')
+                    to: ref('issues_canon')
                     field: issue_id
           - name: time_changed
             description: "Timestamp of when the change occurred."
