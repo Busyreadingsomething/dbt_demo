@@ -1,7 +1,7 @@
 SELECT
     JIR.id AS epic_id,
     JIR.issue::json->'key' AS key,
-    'epic_name' AS epic_name,
+    JIR.issue::json->'fields'->'summary' AS epic_name,
     JIR.issue::json->'fields'->'timespent' AS time_spent,
     JIR.issue::json->'fields'->'project'->'id' AS project_id,
     JIR.issue::json->'fields'->'issueType'->'name' AS issue_type,
@@ -13,7 +13,6 @@ SELECT
     JIR.issue::json->'fields'->'duedate' AS due_date,
     JIR.issue::json->'fields'->'updated' AS last_updated_date,
     JIR.issue::json->'fields'->'status'->'name' AS status,
-    JIR.issue::json->'fields'->'summary' AS summary,
     JIR.issue::json->'fields'->'description'->'content' AS description,
     JIR.issue::json->'fields'->'creator'->'accountId' AS reporter_id,
     JIR.issue::json->'fields'->'assignee'->'accountId' AS assignee_id,
