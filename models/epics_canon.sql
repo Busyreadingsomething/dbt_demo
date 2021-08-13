@@ -30,4 +30,3 @@ SELECT
     'JIRA' AS data_source
 FROM jira_issue_raw AS JIR
 WHERE issue::json->'fields'->'issuetype'->>'name' = 'Epic'
-LIMIT 10;
