@@ -145,10 +145,6 @@ models:
                 - not_null
           - name: sprint_id
             description: "FK referencing the Sprint."
-            tests:
-                - relationships:
-                    to: ref('sprints')
-                    field: sprint_id
           - name: epic_id
             description: "Epic the issue is tied to."
             tests:
@@ -185,11 +181,6 @@ models:
                     field: issue_id
           - name: time_changed
             description: "Timestamp of when the change occurred."
-            tests:
-                - not_null
-                - relationships:
-                    to: ref('sprints')
-                    field: sprint_id
           - name: new_value
             description: "Value of the field it was changed to."
           - name: author_id
