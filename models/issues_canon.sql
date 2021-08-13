@@ -9,13 +9,13 @@ SELECT
     JIR.issue::json->'fields'->'issueType'->'name' AS issue_type,
     JIR.issue::json->'fields'->'resolution'->'name' AS resolution,
     JIR.issue::json->'fields'->'workratio' AS work_ratio,
-    JIR.issue::json->'fields'->'lastViewed' AS last_viewed_date,
-    JIR.issue::json->'fields'->'resolutiondate' AS resolution_date,
-    JIR.issue::json->'fields'->'created' AS created_date,
-    JIR.issue::json->'fields'->'duedate' AS due_date,
+    TO_TIMESTAMP(JIR.issue::json->'fields'->>'lastViewed', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS last_viewed_date,
+    TO_TIMESTAMP(JIR.issue::json->'fields'->>'resolutiondate', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS resolution_date,
+    TO_TIMESTAMP(JIR.issue::json->'fields'->>'created', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS created_date,
+    TO_TIMESTAMP(JIR.issue::json->'fields'->>'duedate', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS due_date,
     JIR.issue::json->'fields'->'priority'->'priority'->'name' AS priority,
     JIR.issue::json->'fields'->'timeoriginalestimate' AS original_estimate,
-    JIR.issue::json->'fields'->'updated' AS last_updated_date,
+    TO_TIMESTAMP(JIR.issue::json->'fields'->>'updated', 'YYYY-MM-DD"T"HH24:MI:SS.MSZ') AS last_updated_date,
     JIR.issue::json->'fields'->'status'->'name' AS status,
     JIR.issue::json->'fields'->'summary' AS summary,
     JIR.issue::json->'fields'->'description'->'content' AS description,
@@ -33,4 +33,4 @@ SELECT
     'epic_id' AS epic_id,
     JIR.issue::json->>'self' AS self_url,
     'JIRA' AS data_source
-FROM jira_issue_raw AS JIR;
+FROM jira_issue_raw AS JIR
